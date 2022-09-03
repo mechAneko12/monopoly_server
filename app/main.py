@@ -36,3 +36,12 @@ app = FastAPI()
 @app.get("/something/{item_id}")
 async def read_item(item_id):
     return {"something": item_id}
+
+from pydantic import BaseModel
+class Info(BaseModel):
+    id: int
+    name: str
+
+@app.post("/post")
+async def read_item(info: Info):
+    return {'message': f'id: {info.id}, name: {info.name}'}
